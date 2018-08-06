@@ -1,21 +1,8 @@
 var ctx = null;
 var tamCelula = 32;
-//var celulay = 40;
 var mapax = 20, mapay = 20;
 var cells = [];
-//var canvas = 0;
-/*
-cells[0]=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-cells[1]=[0, 6, 1, 1, 1, 1, 1, 1, 1, 0];
-cells[2]=[0, 1, 1, 1, 1, 1, 3, 1, 1, 0];
-cells[3]=[0, 1, 1, 1, 1, 1, 1, 1, 1, 0];
-cells[4]=[0, 1, 1, 2, 1, 1, 1, 1, 1, 0];
-cells[5]=[0, 1, 1, 1, 1, 1, 1, 1, 1, 0];
-cells[6]=[0, 1, 1, 1, 1, 1, 2, 6, 1, 0];
-cells[7]=[0, 1, 3, 1, 1, 1, 1, 1, 1, 0];
-cells[8]=[0, 1, 1, 1, 1, 3, 1, 1, 1, 0];
-cells[9]=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-*/
+
 cells = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -76,22 +63,25 @@ function drawGame(){
 function preencheMapa() {
   var rand;
   var numeroTesouros = 0;
-  var linhaDesouro = -1;
+  var linhaTesouro = -1;
 
   for (var i = 0; i < mapax; i++) {
     for (var j = 0; j < mapay; j++) {
       rand = Math.random() * 100;
-      cells[i][j] = 1;
-      //console.log(rand,numeroTesouros);
-      if (rand <= 20) {//bomba
+      cells[i][j] = 1;//limpa o mapa, tudo vazio
+      cells[1][1] = 8;
+      if(rand <= 20 && //coloca as bombas primeiro
+      i != 1 && j!= 1) {//aloca espaco para o personagem
         cells[i][j] = 2;
-      }
-      if(i==0 || i==19 || j==0 || j==19){//parede //moldura do mapa
+      }if(i==0 || i==19 || j==0 || j==19){//parede //moldura do mapa
         cells[i][j] = 0;
-      }else if (rand >= 95 && numeroTesouros < 5 && linhaDesouro != i) {//tesouro
-        cells[i][j] = 3;//define o desouro
+      }else if(rand >= 95 && //aguarda as bombas serem colocadas
+        numeroTesouros < 5 && //coloca os tesouros
+        linhaTesouro != i && //nao deixa dois tesouros na mesma linha
+        i != 1 && j!= 1) {//aloca espaco para o personagem
+        cells[i][j] = 3;//define o tesouro no mapa
         numeroTesouros++;//aumenta o numero de desouros no registro
-        linhaDesouro = i;//define a linha do ultimo desouro (para nao repetir)
+        linhaTesouro = i;//define a linha do ultimo desouro (para nao repetir)
       }
     }
   }
@@ -139,9 +129,11 @@ function desenhaMapa() {
 
         break;
         case 8://sprite
-        /*var sprite = new Sprite();
+        var sprite = new Sprite(cells);
         sprite.x = x;
-        sprite.y = y;*/
+        sprite.y = y;
+        ctx.fillStyle = "purple";
+        ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
         break;
         default:
         //ctx.fillStyle = "green";
