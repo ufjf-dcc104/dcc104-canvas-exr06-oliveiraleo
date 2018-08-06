@@ -1,9 +1,11 @@
+//variaveis globais
 var ctx = null;
-var tamCelula = 32;
-var mapax = 20, mapay = 20;
-var cells = [];
+var tamCelula = 32; //tamanho da celula do mapa
+var mapax = 20, mapay = 20; //tamnhos da matriz do mapa
+var cells = []; //instancia o mapa vazio
+var sprite = new Sprite(cells); //instancia o jogador
 
-cells = [
+cells = [ // cria o mapa vazio
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -53,13 +55,15 @@ function drawGame(){
   /*sprite.desenharQuadrado();
   sprite.mover();
   sprite.colisaoObjeto();*/
-
+  //Exibe o fps do jogo
   ctx.fillStyle = "red";
   ctx.fillText("FPS:" + ultimoSegundo, 10, 20);
 
+  sprite.draw(ctx, tamCelula);
+
   requestAnimationFrame(drawGame);
 }
-
+//altera os identificadores do mapa para preenche-lo
 function preencheMapa() {
   var rand;
   var numeroTesouros = 0;
@@ -90,7 +94,7 @@ function preencheMapa() {
 function verificaondeestou() {
   //
 }
-
+//desenha o mapa na tela
 function desenhaMapa() {
   for (var x = 0; x < cells.length; x++) {
     for (var y = 0; y < cells[0].length; y++) {
@@ -129,11 +133,12 @@ function desenhaMapa() {
 
         break;
         case 8://sprite
-        var sprite = new Sprite(cells);
+        //var sprite = new Sprite(cells);
+        //posiciona o sprite no espaco alocado
         sprite.x = x;
         sprite.y = y;
-        ctx.fillStyle = "purple";
-        ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
+        //ctx.fillStyle = "white";
+        //ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
         break;
         default:
         //ctx.fillStyle = "green";

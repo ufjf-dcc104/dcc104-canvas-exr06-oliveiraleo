@@ -9,19 +9,23 @@ function Sprite(mapa){
   this.life = 1;
   this.pontos = 0;
   this.sentido = 0;
-}
-//move o sprite
-this.mover = function(ctx) {
-  //armazena a posicao do sprite
-  this.celulax = Math.floor(this.vx);
-  this.celulay = Math.floor(this.vy);
-  //desenha o sprite no quadrado certo
-  // x e y sao a posicao do sprite total
-  // celulax e a posicao do sprite na matriz, ocupando todo o quadrado
-  this.x =  this.celulax * map.SIZE;
-  this.y =  this.celulay * map.SIZE;
-}
 
-this.draw = function (ctx){
-  //
+  //move o sprite
+  this.mover = function(ctx) {
+    //armazena a posicao do sprite
+    this.celulax = Math.floor(this.vx);
+    this.celulay = Math.floor(this.vy);
+    //desenha o sprite no quadrado certo
+    // x e y sao a posicao do sprite total
+    // celulax e a posicao do sprite na matriz, ocupando todo o quadrado
+    this.x =  this.celulax * map.SIZE;
+    this.y =  this.celulay * map.SIZE;
+  }
+  //desenha o sprite na tela
+  this.draw = function (ctx, tamCelula){
+    ctx.fillStyle = "purple";
+    ctx.fillRect(this.x*tamCelula, this.y*tamCelula, 20, 20);
+    ctx.strokeStyle = "black";
+    ctx.strokeRect(this.x*tamCelula, this.y*tamCelula, tamCelula, tamCelula);
+  }
 }
