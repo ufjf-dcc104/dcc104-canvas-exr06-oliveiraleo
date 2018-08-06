@@ -133,16 +133,17 @@ function desenhaMapa() {
 
         break;
         case 8://sprite
-        //var sprite = new Sprite(cells);
         //posiciona o sprite no espaco alocado
         sprite.x = x;
         sprite.y = y;
-        //ctx.fillStyle = "white";
-        //ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
+        //fundo do sprite
+        ctx.fillStyle = "green";
+        ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
+        //contorno do fundo
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
         break;
         default:
-        //ctx.fillStyle = "green";
-        //ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
       }
 
     }

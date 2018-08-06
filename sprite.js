@@ -23,9 +23,9 @@ function Sprite(mapa){
   }
   //desenha o sprite na tela
   this.draw = function (ctx, tamCelula){
-    ctx.fillStyle = "purple";
-    ctx.fillRect(this.x*tamCelula, this.y*tamCelula, 20, 20);
+    ctx.fillStyle = "purple";//cor do sprite
+    ctx.fillRect(this.x*(tamCelula+6), this.y*(tamCelula+6), 20, 20);//desenha o sprite com 20x20 no meio da celula
     ctx.strokeStyle = "black";
-    ctx.strokeRect(this.x*tamCelula, this.y*tamCelula, tamCelula, tamCelula);
+    ctx.strokeRect(this.x*(tamCelula+6), this.y*(tamCelula+6), 20, 20);
   }
 }
