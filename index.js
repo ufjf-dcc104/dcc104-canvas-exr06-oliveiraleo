@@ -74,15 +74,15 @@ function preencheMapa() {
       rand = Math.random() * 100;
       cells[i][j] = 1;//limpa o mapa, tudo vazio
       cells[1][1] = 8;
-      if(rand <= 20 && //coloca as bombas primeiro
-      i != 1 && j!= 1) {//aloca espaco para o personagem
+      if(rand <= 20 && //coloca as bombas primeiro, em rand% das celulas
+      (i != 1 || j!= 1)) {//aloca espaco para o personagem
         cells[i][j] = 2;
       }if(i==0 || i==19 || j==0 || j==19){//parede //moldura do mapa
         cells[i][j] = 0;
       }else if(rand >= 95 && //aguarda as bombas serem colocadas
         numeroTesouros < 5 && //coloca os tesouros
         linhaTesouro != i && //nao deixa dois tesouros na mesma linha
-        i != 1 && j!= 1) {//aloca espaco para o personagem
+        (i != 1 || j!= 1)) {//aloca espaco para o personagem
         cells[i][j] = 3;//define o tesouro no mapa
         numeroTesouros++;//aumenta o numero de desouros no registro
         linhaTesouro = i;//define a linha do ultimo desouro (para nao repetir)
