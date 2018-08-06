@@ -7,7 +7,8 @@ function Sprite(mapa){
   this.x = this.celulax * mapa.SIZE;
   this.y = this.celulay * mapa.SIZE;
   this.life = 1;
-  this.pontos = 0;
+  this.tesouros = 0;
+  //this.bombas = 0;
   this.sentido = 0;
 
   //move o sprite
@@ -18,8 +19,9 @@ function Sprite(mapa){
     //desenha o sprite no quadrado certo
     // x e y sao a posicao do sprite total
     // celulax e a posicao do sprite na matriz, ocupando todo o quadrado
-    this.x =  this.celulax * map.SIZE;
-    this.y =  this.celulay * map.SIZE;
+    this.x =  this.celulax * cells.SIZE;
+    this.y =  this.celulay * cells.SIZE;
+    //this.vx += 1;
   }
   //desenha o sprite na tela
   this.draw = function (ctx, tamCelula){
