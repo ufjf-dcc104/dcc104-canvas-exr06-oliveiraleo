@@ -141,11 +141,46 @@ function sensor() {
 //desenha o mapa na tela
 function desenhaMapa() {
   for (var x = 0; x < cells.length; x++) {
-    for (var y = 0; y < cells[0].length; y++) {
+    for (var y = 0; y < cells[x].length; y++) {
       //switch (mapa[((x*mapax)+y)]) {
-      switch (this.cells[y][x]) {
+			if(this.cells[x][y] == 0){//parede
+				ctx.fillStyle = "grey";
+				ctx.fillRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+			} else if(this.cells[x][y] == 1){//celula vazia
+				ctx.strokeStyle = "black";
+        ctx.strokeRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+        ctx.fillStyle = "green";
+        ctx.fillRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+			} else if(this.cells[x][y] == 2){//bomba
+				ctx.fillStyle = "red";
+        ctx.fillRect(x*this.tamCelula, y*this.tamCelula, 20, 20);
+				ctx.strokeStyle = "black";
+        ctx.strokeRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+        //ctx.fillStyle = "green";
+        //ctx.fillRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+			} else if(this.cells[x][y] == 3){//tesouro
+				ctx.fillStyle = "yellow";
+        ctx.fillRect(x*this.tamCelula, y*this.tamCelula, 20, 20);
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+			} else if(this.cells[x][y] == 5){//teste em branco
+				//
+			} else if(this.cells[x][y] == 8){//sprite
+				//sprite.x = x;
+        //sprite.y = y;
+        //fundo do sprite
+        ctx.fillStyle = "green";
+        ctx.fillRect(x*tamCelula, y*tamCelula, tamCelula, tamCelula);
+        //contorno do fundo
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
+			}
+
+			/*
+      switch (this.cells[x][y]) {
         case 0://parede
         ctx.fillStyle = "grey";
+				//console.log(x*this.tamCelula,this.tamCelula);
         ctx.fillRect(x*this.tamCelula, y*this.tamCelula, this.tamCelula, this.tamCelula);
 
         //ctx.strokeStyle = "red";
@@ -191,6 +226,7 @@ function desenhaMapa() {
         //
         break;
       }
+			*/
     }
   }
 }
@@ -198,6 +234,8 @@ function desenhaMapa() {
 addEventListener("keydown", function(e){
   switch (e.keyCode) {
     case 38://cima
+		sprite.vy-=1;
+		e.preventDefault();
 
       break;
     case 40://baixo
@@ -205,9 +243,13 @@ addEventListener("keydown", function(e){
       e.preventDefault();
       break;
     case 37://esquerda
+		sprite.vx-=1;
+		e.preventDefault();
 
       break;
     case 39://direita
+		sprite.vx+=1;
+		e.preventDefault();
 
       break;
     default:
